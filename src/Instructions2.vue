@@ -1,35 +1,43 @@
 <template>
-  <div>
+  <div class="instructions">
     <p>
       Bitte lesen Sie diese Instruktionen aufmerksam durch und versuchen Sie,
       diese während des Experimentverlaufs so nah wie möglich zu befolgen.
     </p>
+
+    <p>
+      In diesem Experiment hören Sie einen Dialog, bestehend aus einer Frage und
+      einer Antwort. Bitte stellen Sie sich vor, dass es sich hier um einen
+      Dialog zwischen einem Kind und einem Elternteil handelt, die ein Buch mit
+      Bildern anschauen. Sie sehen diese Bilder auch auf dem Bildschirm. Das
+      Kind stellt eine Frage über eines der Bilder in dem Buch. Das Elternteil
+      antwortet auf diese Frage. Ihre Aufgabe ist es zu beurteilen, über welches
+      der Bilder (es werden immer genau zwei zur Auswahl gezeigt), Ihrer Meinung
+      nach in dem Dialog gesprochen wird.
+    </p>
+
     <h3>Ablauf</h3>
     <p>
-      Bitte bewegen Sie zu Beginn eines jeden Durchgangs den Mauszeiger zum
-      Startpunkt. Dies ist der blaue Knopf mit dem Label "GO" am unteren
-      Bildschirmrand. Sie starten jeden Durchgang selbst, indem Sie den
-      Startknopf anklicken. Pro Durchgang wird Ihnen ein kurzer Satz Wort für
-      Wort angezeigt. Am oberen Bildschirmrand sehen Sie zwei Antwortflächen, je
-      eine für »wahr« (w) und eine für »falsch« (f). Bitte klicken Sie zügig auf
-      die richtige Antwortfläche, je nachdem, ob Sie einen wahren oder einen
-      falschen Satz gelesen haben.
+      Der Ablauf im Detail wird so aussehen, dass Sie pro Durchgang zunächst die
+      Frage des Elternteils hören. Am oberen Bildschirmrand werden Ihnen nun die
+      zwei Bilder gezeigt. Bitte schauen Sie sich diese Bilder in Ruhe an.
+      Sobald der Startpunkt angezeigt wird—ein grünes Quadrat am unteren
+      Bildschirmrand—starten Sie den restlichen Verlauf des Durchgangs selbst,
+      indem Sie diesen Startpunkt anklicken. Bitte bewegen Sie den Mauszeiger
+      unmittelbar nach dem Klick auf den Startpunkt in Richtung des oberen
+      Bildschirmrandes. Erst, wenn Sie den Mauszeiger ausreichend weit bewegt
+      haben, hören Sie die Antwort des Elternteils auf die Frage des Kindes, die
+      Sie zuvor gehört haben. Bitte bewegen Sie den Mauszeiger weiter auf
+      dasjenige der beiden Bilder, welches Ihrer Meinung nach den Inhalt des
+      gehörten Dialoges widerspiegelt.
     </p>
     <p>
-      Bitte beginnen Sie unmittelbar mit Erscheinen des letzten Wortes des
-      Satzes, den Mauszeiger in Richtung der Antwortflächen am oberen
-      Bildschirmrand zu bewegen. Sollten Sie den Mauszeiger am Satzende nicht
-      schnell genug nach oben bewegen, erscheint auf dem Bildschirm ein
-      Warnsignal, nämlich ein “!!!”. Das ist nicht weiter schlimm. Es soll Sie
-      nur daran erinnern, beim nächsten Durchgang die Maus zügiger bei
-      Erscheinen des letzten Wortes nach oben zu bewegen.
-    </p>
-    <p>
-      Nachdem Sie Ihre Wahl getroffen haben, verschwinden die beiden
-      Antwortflächen und der Startknopf. Bitte nutzen Sie diese
-      »Verschnaufspause«, um den Mauszeiger wieder in die Startregion
-      zurückzuführen. Sobald der Startknopf wieder erscheint, können Sie in Ruhe
-      den nächsten Durchgang starten, indem Sie erneut den Startpunkt anklicken.
+      Nachdem Sie Ihre Wahl getroffen haben, verschwinden die beiden Bilder und
+      der grüne Startpunkt wird für einen kurzen Moment gelb. Hiernach beginnt
+      der folgende Durchgang, indem Ihnen die Frage eines neuen Dialoges
+      vorgespielt wird. Sobald der grüne Startpunkt wieder erschienen ist,
+      können Sie in Ruhe den Rest des Durchgang starten, indem Sie erneut den
+      Startpunkt anklicken.
     </p>
     <p>
       Auch wenn das Experiment nur etwa 20 Minuten dauern wird, kann die Ihnen
@@ -43,17 +51,12 @@
     <h3>Auf einen Blick:</h3>
     <ul>
       <li>
-        Beginnen Sie die Mausbewegung unmittelbar mit Erscheinen des letzten
-        Wortes des Satzes.
+        Bitte antworten Sie unmittelbar nach Ihrem Klick auf den Startknopf.
       </li>
       <li>
-        Antworten Sie zügig. Bei Verzögerungen erinnert Sie ein eingeblendetes
-        “!!!” daran, beim nächsten Durchgang etwas schneller zu sein.
-      </li>
-      <li>
-        Achten Sie aufmerksam und konzentriert auf die Sätze, die Ihnen
-        präsentiert werden und versuchen Sie, stets die richtige Antwort
-        anzuklicken.
+        Achten Sie aufmerksam und konzentriert auf den Dialog und die Bilder,
+        die Ihnen präsentiert werden und versuchen Sie, stets die richtige
+        Antwort anzuklicken.
       </li>
       <li>
         Nutzen Sie gerne die Pausen zwischen einzelnen Durchgängen zum

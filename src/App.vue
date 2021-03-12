@@ -18,7 +18,7 @@
     <!-- The contents of the #screens template slot define your experiment -->
     <template #screens>
       <Screen
-        :title="'Probandeninformation zur Studie “2Step-SI”'"
+        :title="'Probandeninformation zur Studie “DPP-MT”'"
         class="instructions"
       >
         <Instructions />
@@ -340,5 +340,10 @@ export default {
   padding-top: 30px;
   background: lightgrey;
   font-size: 30px;
+}
+
+.instructions {
+  width: 800px;
+  margin: 0 auto;
 }
 </style>

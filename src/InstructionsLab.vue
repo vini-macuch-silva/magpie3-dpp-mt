@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="instructions">
     <p>
       Sie beteiligen sich an einer psycholinguistischen Studie des Instituts für
       Kognitionswissenschaft der Universität Osnabrück, Fachgebiet Kognitive
@@ -18,19 +18,19 @@
       und Ihre Aufgabe heranführt, sowie der eigentlichen Testphase.
     </p>
     <p>
-      Im folgenden Experiment werden Sie gebeten, einfache deutsche Sätze auf
-      ihren Wahrheitswert zu überprüfen. Das heißt: Ihnen wird jeweils ein Satz
-      schriftlich präsentiert und Ihre Aufgabe ist es zu entscheiden, ob es sich
-      um einen wahren oder einen falschen Satz handelt. Die folgenden beiden
-      Beispielsätze veranschaulichen diese Aufgabe:
+      Im folgenden Experiment werden Sie gebeten, sich kurze Dialoge zwischen
+      zwei Personen anzuhören und anzugeben, über was sich diese Personen Ihrer
+      Meinung nach unterhalten. Das heißt: Ihnen wird je ein gesprochener Dialog
+      (bestehend aus einer Frage und einer Antwort) vorgespielt. Zudem werden
+      Ihnen zwei Bilder präsentiert, von denen Sie bitte dasjenige auswählen,
+      was Ihrer Meinung nach den Inhalt des gehörten Dialoges am Besten
+      widerspiegelt.
     </p>
+    <p>Das folgende schriftliche Beispiel veranschaulicht diese Aufgabe:</p>
     <ol>
-      <li>
-        »Alle Hunde sind Säugetiere.« Ist dieser Satz wahr oder falsch?
-      </li>
-      <li>
-        »Einige Möbel sind Zitronen.« Ist dieser Satz wahr oder falsch?
-      </li>
+      <li>Frage: »Was ist das für ein Tier mit dem weichen Fell?«</li>
+      <li>Antwort: »Stimmt, der Hund hat wirklich ein weiches Fell.«</li>
+      <li>Worum geht es? A) um einen Hund oder B) um ein Krokodil</li>
     </ol>
     <p>
       Sie steuern hierbei den zeitlichen Ablauf des Experiments selbst, es gibt
@@ -39,14 +39,15 @@
       Nachfragen zu stellen.
     </p>
     <p>
-      Die Sätze, die Sie in diesem Experiment lesen werden, sind allesamt
-      unverfänglich. Es sind keine Risiken der Teilnahme zu erwarten.
+      Die Dialoge, die Sie in diesem Experiment hören werden sowie die Bilder,
+      die Sie sehen werden, sind allesamt unverfänglich. Es sind keine Risiken
+      der Teilnahme zu erwarten.
     </p>
     <h2>Was wird gemessen?</h2>
     <p>
-      Während der Testphase des Experiments zeichnen wir ihre Antworten
-      (wahr/falsch) auf, die Zeit, die Sie sich zum Antworten genommen haben,
-      sowie die Bewegung der Maus hin zur gewählten Antwort.
+      Während der Testphase des Experiments zeichnen wir Ihre Antworten (welches
+      Bild Sie klicken) auf, die Zeit, die Sie sich zum Antworten genommen
+      haben, sowie die Bewegung der Maus hin zur gewählten Antwort.
     </p>
     <h2>Sicherheitshinweis</h2>
     <p>
@@ -107,6 +108,6 @@
 
 <script>
 export default {
-  name: 'Instructions'
+  name: 'InstructionsLab'
 };
 </script>
