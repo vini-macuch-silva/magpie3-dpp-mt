@@ -41,7 +41,7 @@
           window_inner_width
         }"
       />
-      <Wait :time="1000" @done="$magpie.saveAndNextScreen()" />
+      <Wait :time="2000" @done="$magpie.saveAndNextScreen()" />
     </template>
   </ForcedChoiceMousetrackingScreen>
 </template>
