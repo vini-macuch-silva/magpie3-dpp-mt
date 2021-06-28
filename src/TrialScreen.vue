@@ -1,53 +1,49 @@
 <template>
-  <Screen :progress="progress" class="trial">
-    <template #0="{ responses }">
-      <CategorizationMousetracking
-        :select-event="'mouseover'"
-        :response.sync="responses.response"
-        :mouse-track.sync="responses.mouseTrack"
-      >
-        <template #option1>
-          <div class="optionBox left">
-            <img :src="'images/' + leftOption" />
-          </div>
-        </template>
-        <template #option2>
-          <div class="optionBox right">
-            <img :src="'images/' + rightOption" />
-          </div>
-        </template>
-        <template #prep="{ done }">
-          <audio
-            :src="'audio/' + item.question_file"
-            :autoplay="true"
-            @ended="done"
-          />
-        </template>
-        <template #stimulus="{ coordinates }">
-          <audio :src="'audio/' + item.answer_file" :autoplay="true" />
-        </template>
-        <template #feedback>
-          <Wait
-            :time="1000"
-            @done="
-              $magpie.addTrialData({
-                ...item,
-                ...responses.mouseTrack,
-                trialType,
-                trialNumber,
-                response:
-                  responses.response === 'left' ? leftOption : rightOption,
-                left_box_is_option: targetIsLeft ? 'target' : 'competitor',
-                window_inner_height,
-                window_inner_width
-              });
-              $magpie.nextScreen();
-            "
-          />
-        </template>
-      </CategorizationMousetracking>
+  <ForcedChoiceMousetrackingScreen
+    :progress="progress"
+    class="trial"
+    :select-event="'mouseover'"
+    :option1="leftOption"
+    :option2="rightOption"
+  >
+    <template #option1>
+      <div class="optionBox left">
+        <img :src="'images/' + leftOption" />
+      </div>
     </template>
-  </Screen>
+
+    <template #option2>
+      <div class="optionBox right">
+        <img :src="'images/' + rightOption" />
+      </div>
+    </template>
+
+    <template #preparation>
+      <audio
+        :src="'audio/' + item.question_file"
+        :autoplay="true"
+        @ended="$magpie.nextSlide()"
+      />
+    </template>
+
+    <template #stimulus>
+      <audio :src="'audio/' + item.answer_file" :autoplay="true" />
+    </template>
+
+    <template #feedback>
+      <Record
+        :data="{
+          ...item,
+          trialType,
+          trialNumber,
+          left_box_is_option: targetIsLeft ? 'target' : 'competitor',
+          window_inner_height,
+          window_inner_width
+        }"
+      />
+      <Wait :time="1000" @done="$magpie.saveAndNextScreen()" />
+    </template>
+  </ForcedChoiceMousetrackingScreen>
 </template>
 <script>
 export default {
@@ -59,6 +55,10 @@ export default {
     },
     trialNumber: {
       type: Number,
+      required: true
+    },
+    item: {
+      type: Object,
       required: true
     },
     group: {
@@ -90,9 +90,6 @@ export default {
       return this.targetIsLeft
         ? this.item.picture_competitor
         : this.item.picture_target;
-    },
-    item() {
-      return this.$magpie.currentTrial[this.trialType];
     }
   }
 };

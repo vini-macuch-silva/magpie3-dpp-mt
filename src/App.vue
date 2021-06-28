@@ -1,222 +1,108 @@
 <template>
-  <!--
-  Set your experiment id here and
-  Define your data sources with the trials attribute -->
-  <Experiment
-    title="DPP-MT Online Studie"
-    :trials="{
-      training: training_trials,
-      main: main_trials
-    }"
-    :wide="true"
-  >
-    <!-- The contents of the #title template slot will be displayed in the upper left corner of the experiment -->
-    <template #title>
-      <div></div>
-    </template>
+  <Experiment title="DPP-MT Online Studie" :wide="true">
+    <InstructionScreen :title="'Probandeninformation zur Studie “DPP-MT”'">
+      <Instructions />
+    </InstructionScreen>
 
-    <!-- The contents of the #screens template slot define your experiment -->
-    <template #screens>
-      <Screen
-        :title="'Probandeninformation zur Studie “DPP-MT”'"
-        class="instructions"
+    <InstructionScreen :title="'Hinweise zur Durchführung dieses Versuchs'">
+      <p>
+        Bitte benutzen Sie für die Dauer des Experimentes den "Fullscreen
+        Modus":
+        <a href="javascript:void(0)" @click="turnOnFullScreen"
+          >Auf Fullscreen umschalten</a
+        >
+      </p>
+      <p>Benutzen Sie eine Maus oder ein Trackpad.</p>
+      <p>
+        Wenn Sie eine Maus benutzen, schaffen Sie sich Platz für die
+        Mausbewegung. Sie sollten den Mauszeiger in einer Bewegung ohne Abheben
+        der Maus von der unteren zur oberen Bildschirmkannte bewegen können.
+      </p>
+      <p>
+        Als nächstes folgen einige Probedurchgänge zur Benutzung von Maus oder
+        Trackpad. Bitte folgen Sie den Anweisungen auf dem Bildschirm.
+      </p>
+    </InstructionScreen>
+
+    <template v-for="i in 1">
+      <ForcedChoiceMousetrackingScreen
+        :key="'mouse_speed_test-' + i"
+        :select-event="'mouseover'"
+        option1="left"
+        option2="right"
+        qud="Klicken Sie auf 'go' und bewegen Sie den Mauszeiger so schnell wie
+        möglich in einer geraden Linie auf die graue Box.
+        Versuchen Sie die Bewegung auszuführen, ohne die Bewegung durch
+        Abheben der Maus oder des Fingers zu unterbrechen."
       >
-        <Instructions />
-        <br />
-        <!-- The $magpie field gives you access to magpie-specific functionality -->
-        <button @click="$magpie.nextScreen()">Weiter</button>
-      </Screen>
-
-      <Screen
-        :title="'Hinweise zur Durchführung dieses Versuchs'"
-        class="instructions"
-      >
-        <p>
-          Bitte benutzen Sie für die Dauer des Experimentes den "Fullscreen
-          Modus":
-          <a href="javascript:void(0)" @click="turnOnFullScreen"
-            >Auf Fullscreen umschalten</a
-          >
-        </p>
-        <p>Benutzen Sie eine Maus oder ein Trackpad.</p>
-        <p>
-          Wenn Sie eine Maus benutzen, schaffen Sie sich Platz für die
-          Mausbewegung. Sie sollten den Mauszeiger in einer Bewegung ohne
-          Abheben der Maus von der unteren zur oberen Bildschirmkannte bewegen
-          können.
-        </p>
-        <p>
-          Als nächstes folgen einige Probedurchgänge zur Benutzung von Maus oder
-          Trackpad. Bitte folgen Sie den Anweisungen auf dem Bildschirm.
-        </p>
-        <br />
-        <!-- The $magpie field gives you access to magpie-specific functionality -->
-        <button @click="$magpie.nextScreen()">Weiter</button>
-      </Screen>
-
-      <template v-for="i in 1">
-        <Screen :key="'mouse_speed_test-' + i">
-          <template #0="{ responses }">
-            <CategorizationMousetracking
-              :select-event="'mouseover'"
-              :mouse-track.sync="responses.mouseTrack"
-            >
-              <template #option1>
-                <div v-if="i % 2 === 0" class="optionBox left speed-test">
-                  X
-                </div>
-              </template>
-              <template #option2>
-                <div v-if="i % 2 === 1" class="optionBox right speed-test">
-                  X
-                </div>
-              </template>
-              <template #stimulus="{ coordinates }">
-                <Timer key="mouse-time" v-model="responses.timer" />
-              </template>
-              <template #feedback>
-                <Wait
-                  :time="0"
-                  @done="
-                    $magpie.addTrialData({
-                      trialType: 'mouse-speed-test',
-                      trialNumber: i,
-                      ...responses.mouseTrack,
-                      ...getScreenDimensions(),
-                      position: i % 2 === 0 ? 'left' : 'right',
-                      mouse_speed_time: responses.timer()
-                    });
-                    $magpie.nextScreen();
-                  "
-                />
-              </template>
-            </CategorizationMousetracking>
-            <p>
-              Klicken Sie auf "go" und bewegen Sie den Mauszeiger so schnell wie
-              möglich in einer geraden Linie auf die graue Box.<br />
-              Versuchen Sie die Bewegung auszuführen, ohne die Bewegung durch
-              Abheben der Maus oder des Fingers zu unterbrechen.
-            </p>
-          </template>
-        </Screen>
-      </template>
-
-      <Screen :title="'Instruktionen'" class="instructions">
-        <Instructions2 />
-        <button @click="$magpie.nextScreen()">Trainingsphase starten</button>
-      </Screen>
-
-      <!-- Practice trials -->
-      <!-- Here we create screens in a loop for every entry in training -->
-      <template v-for="i in 2">
-        <TrialScreen
-          :key="'training-' + i"
-          trial-type="training"
-          :trial-number="i"
-          :group="groupName"
-          :progress="(i - 1) / training_trials_length"
-        />
-      </template>
-
-      <Screen :title="'Kurze Pause!'">
-        Das Training ist vorbei. Nehmen Sie sich gerne eine kurze Pause, bevor
-        Sie mit dem Hauptteil des Experiments beginnen.
-        <button @click="$magpie.nextScreen()">
-          Zum Hauptteil des Experiments
-        </button>
-      </Screen>
-
-      <template v-for="i in 10">
-        <TrialScreen
-          :key="'test-' + i"
-          trial-type="main"
-          :trial-number="i"
-          :group="groupName"
-          :progress="(i - 1) / main_trials_length"
-        />
-      </template>
-
-      <Screen key="input_method">
-        <template #0="{ responses }">
-          <p>What did you use to complete this task?</p>
-          <ForcedChoiceInput
-            :response.sync="responses.inputmethod"
-            :options="['Mouse', 'Trackpad', 'both', 'neither']"
-            @update:response="
-              $magpie.addExpData({ input_method: $event });
-              $magpie.nextScreen();
-            "
+        <template #option1>
+          <div v-if="i % 2 === 0" class="optionBox left speed-test">X</div>
+        </template>
+        <template #option2>
+          <div v-if="i % 2 === 1" class="optionBox right speed-test">X</div>
+        </template>
+        <template #feedback>
+          <Record
+            :data="{
+              trialType: 'mouse-speed-test',
+              trialNumber: i,
+              ...getScreenDimensions(),
+              position: i % 2 === 0 ? 'left' : 'right'
+            }"
           />
+          <Wait :time="0" @done="$magpie.saveAndNextScreen()" />
         </template>
-      </Screen>
-
-      <Screen key="additional-information" title="Additional information">
-        <template #0="{ responses }">
-          <p>
-            Answering the following questions is optional, but your answers will
-            help us analyze our results.
-          </p>
-          <div style="text-align: left; width: 200px; margin: 0 auto">
-            <p>
-              <label
-                >Age
-                <input v-model="responses.age" type="number" max="110" min="18"
-              /></label>
-            </p>
-            <p>
-              <label
-                >Gender
-                <select v-model="responses.gender">
-                  <option value="male">male</option>
-                  <option value="female">female</option>
-                  <option value="other">other</option>
-                </select></label
-              >
-            </p>
-            <p>
-              <label
-                >Level of Eduction
-                <select v-model="responses.education">
-                  <option value="Graduated Highschool">
-                    Graduated Highschool
-                  </option>
-                  <option value="Graduated College">Graduated College</option>
-                  <option value="Higher degree">Higher degree</option>
-                </select></label
-              >
-            </p>
-            <p>
-              <label
-                >Native languages
-                <input
-                  v-model="responses.languages"
-                  type="text"
-                  placeholder="langauge(s) spoken at home when you were a child"
-                  style="width: 400px"
-              /></label>
-            </p>
-            Further comments
-            <TextareaInput :response.sync="responses.comments"></TextareaInput>
-          </div>
-
-          <button
-            @click="
-              $magpie.addExpData(responses);
-              $magpie.nextScreen();
-            "
-          >
-            Next
-          </button>
-        </template>
-      </Screen>
-
-      <SubmitResults />
-
-      <!-- While developing your experiment, using the DebugResults screen is fine,
-      once you're going live, you can use the <SubmitResults> screen to automatically send your experimental data to the server. -->
-
-      <Screen :title="'Thanks!'"> Goodbye </Screen>
+      </ForcedChoiceMousetrackingScreen>
     </template>
+
+    <InstructionScreen :title="'Instruktionen'">
+      <Instructions2 />
+    </InstructionScreen>
+
+    <!-- Practice trials -->
+    <!-- Here we create screens in a loop for every entry in training -->
+    <template v-for="(trial, i) in training_trials.slice(0, 3)">
+      <TrialScreen
+        :key="'training-' + i"
+        trial-type="training"
+        :trial-number="i"
+        :group="groupName"
+        :item="trial"
+        :progress="i / training_trials.length"
+      />
+    </template>
+
+    <Screen :title="'Kurze Pause!'">
+      Das Training ist vorbei. Nehmen Sie sich gerne eine kurze Pause, bevor Sie
+      mit dem Hauptteil des Experiments beginnen.
+      <button @click="$magpie.nextScreen()">
+        Zum Hauptteil des Experiments
+      </button>
+    </Screen>
+
+    <template v-for="(trial, i) in main_trials.slice(0, 5)">
+      <TrialScreen
+        :key="'test-' + i"
+        trial-type="main"
+        :trial-number="i"
+        :group="groupName"
+        :item="trial"
+        :progress="i / main_trials.length"
+      />
+    </template>
+
+    <Screen key="input_method">
+      <p>What did you use to complete this task?</p>
+      <ForcedChoiceInput
+        :response.sync="$magpie.measurements.inputmethod"
+        :options="['Mouse', 'Trackpad', 'both', 'neither']"
+        @update:response="$magpie.saveAndNextScreen()"
+      />
+    </Screen>
+
+    <PostTestScreen />
+
+    <SubmitResultsScreen />
   </Experiment>
 </template>
 
@@ -288,9 +174,7 @@ export default {
 
     return {
       group,
-      main_trials_length: 120,
       main_trials,
-      training_trials_length: 10,
       training_trials
     };
   },
@@ -329,10 +213,6 @@ export default {
 };
 </script>
 <style>
-.instructions {
-  text-align: left;
-}
-
 .optionBox.speed-test {
   width: 90px;
   height: 90px;
@@ -340,10 +220,5 @@ export default {
   padding-top: 30px;
   background: lightgrey;
   font-size: 30px;
-}
-
-.instructions {
-  width: 800px;
-  margin: 0 auto;
 }
 </style>
