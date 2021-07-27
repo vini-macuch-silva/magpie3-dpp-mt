@@ -2,7 +2,7 @@
   <Experiment title="DPP-MT Online Studie" :wide="true">
 
     <!-- general instructions -->
-    <InstructionScreen :title="'Probandeninformatio zur Studie “DPP-MT”'">
+    <InstructionScreen :title="'Probandeninformation zur Studie “DPP-MT”'">
       <Instructions />
     </InstructionScreen>
 
@@ -11,7 +11,7 @@
     <Screen key="IDKennung" title="Persönliche Identifikationskennung"
       :validations="{
         text: {
-          minLength: $magpie.v.minLength(4)
+          minLength: $magpie.v.minLength(2)
         }
       }">
       <Slide>
