@@ -19,7 +19,9 @@
     </template>
 
     <template #preparation>
-      <button @click="preparationPlaying = true">Start</button>
+      <button class="prep-start" @click="preparationPlaying = true">
+        Start
+      </button>
       <audio
         :src="'audio/' + item.question_file"
         :autoplay="preparationPlaying"
@@ -113,5 +115,10 @@ export default {
 }
 .optionBox.right {
   right: -28px;
+}
+.prep-start {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
 }
 </style>
