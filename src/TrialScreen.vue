@@ -19,9 +19,10 @@
     </template>
 
     <template #preparation>
+      <button @click="preparationPlaying = true">Start</button>
       <audio
         :src="'audio/' + item.question_file"
-        :autoplay="true"
+        :autoplay="preparationPlaying"
         @ended="$magpie.nextSlide()"
       />
     </template>
@@ -77,7 +78,8 @@ export default {
       displayWarning: false,
       rsvpDone: false,
       window_inner_width: window.innerWidth,
-      window_inner_height: window.innerHeight
+      window_inner_height: window.innerHeight,
+      preparationPlaying: false
     };
   },
   computed: {
