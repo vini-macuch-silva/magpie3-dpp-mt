@@ -1,9 +1,38 @@
 <template>
   <Experiment title="DPP-MT Online Studie" :wide="true">
-    <InstructionScreen :title="'Probandeninformation zur Studie “DPP-MT”'">
+
+    <!-- general instructions -->
+    <InstructionScreen :title="'Probandeninformatio zur Studie “DPP-MT”'">
       <Instructions />
     </InstructionScreen>
 
+
+
+    <Screen key="IDKennung" title="Persönliche Identifikationskennung"
+      :validations="{
+        text: {
+          minLength: $magpie.v.minLength(4)
+        }
+      }">
+      <Slide>
+        <p>
+            Bitte geben Sie hier eine Identifikationskennung an, mit der wir Ihren später
+            VP-Stunden gutschreiben können. Sie können Ihre Matrikelnummer oder Ihren Namen
+            verwenden, aber um die Anonymität Ihrer Daten besser zu sichern, ist eine Kennung,
+            die nicht auf Ihre Person schließen lässt anzuraten.
+        </p>
+        <TextareaInput :response.sync="$magpie.measurements.IDKennung"></TextareaInput>
+        <button @click="$magpie.addExpData({IDKennung_VP: $magpie.measurements.IDKennung}); $magpie.nextScreen();">
+          <!-- FIXME -->
+          <!-- v-if="!$magpie.validateMeasurements.text.$invalid" -->
+            Next
+          </button>
+      </Slide>
+    </Screen>
+
+
+
+    <!-- info on full-screen and input method -->
     <InstructionScreen :title="'Hinweise zur Durchführung dieses Versuchs'">
       <p>
         Bitte benutzen Sie für die Dauer des Experimentes den "Fullscreen
@@ -24,7 +53,7 @@
       </p>
     </InstructionScreen>
 
-    <template v-for="i in 1">
+    <template v-for="i in 6">
       <ForcedChoiceMousetrackingScreen
         :key="'mouse_speed_test-' + i"
         :select-event="'mouseover'"
@@ -61,7 +90,7 @@
 
     <!-- Practice trials -->
     <!-- Here we create screens in a loop for every entry in training -->
-    <template v-for="(trial, i) in training_trials.slice(0, 3)">
+    <template v-for="(trial, i) in training_trials">
       <TrialScreen
         :key="'training-' + i"
         trial-type="training"
@@ -80,7 +109,7 @@
       </button>
     </Screen>
 
-    <template v-for="(trial, i) in main_trials.slice(0, 5)">
+    <template v-for="(trial, i) in main_trials">
       <TrialScreen
         :key="'test-' + i"
         trial-type="main"
@@ -108,8 +137,8 @@
 
 <script>
 // Load data from csv files as javascript arrays with objects
-import items from '../trials/disc-part-items.csv';
-import trainingItems from '../trials/disc-part-items.csv';
+import items from '../trials/magpie-mousetrack-DPP-data.csv';
+import trainingItems from '../trials/magpie-mousetrack-DPP-data.csv';
 import _ from 'lodash';
 import TrialScreen from './TrialScreen.vue';
 import Instructions from './InstructionsProlific';
@@ -119,58 +148,11 @@ export default {
   name: 'App',
   components: { Instructions, TrialScreen, Instructions2 },
   data() {
-    console.log(trainingItems);
-    const group = Math.round(Math.random());
-
-    let main_trials;
-    const reliable_actually = _.shuffle(
-      items.filter((i) => i.condition === 'reliable' && i.DP === 'actually')
-    );
-    const reliable_indeed = _.shuffle(
-      items.filter((i) => i.condition === 'reliable' && i.DP === 'indeed')
-    );
-    const unreliable_actually = _.shuffle(
-      items.filter((i) => i.condition === 'unreliable' && i.DP === 'actually')
-    );
-    const unreliable_indeed = _.shuffle(
-      items.filter((i) => i.condition === 'unreliable' && i.DP === 'indeed')
-    );
-    const fillers = _.shuffle(items.filter((i) => i.condition === 'filler'));
-
-    if (group === 0) {
-      // reliable
-      main_trials = _.flatten(
-        Array(12)
-          .fill(null)
-          .map(() =>
-            _.shuffle([
-              ...reliable_actually.splice(0, 3),
-              ...reliable_indeed.splice(0, 3),
-              ...fillers.splice(0, 6)
-            ])
-          )
-      );
-    } else {
-      main_trials = _.flatten(
-        Array(12)
-          .fill(null)
-          .map(() =>
-            _.shuffle([
-              ...reliable_actually.splice(0, 3),
-              ...reliable_indeed.splice(0, 3),
-              ...unreliable_actually.splice(0, 2),
-              ...unreliable_indeed.splice(0, 2),
-              ...fillers.splice(0, 2)
-            ])
-          )
-      );
-    }
-
-    const training_trials = _.shuffle([
-      ...reliable_actually.splice(0, 3),
-      ...reliable_indeed.splice(0, 3),
-      ...fillers.splice(0, 6)
-    ]);
+    const item_set_ID = _.shuffle(_.map(items, 'item_set_ID'))[0];
+    const main_trials = _.filter(items, { 'item_set_ID' : item_set_ID, 'train_or_main' : "main" });
+    const training_trials = _.filter(items, { 'item_set_ID' : item_set_ID, 'train_or_main' : "train" });
+    // console.log(training_trials);
+    const group = main_trials[0].group_type == "reliable" ? 0 : 1;
 
     return {
       group,
