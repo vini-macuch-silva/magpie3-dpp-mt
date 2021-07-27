@@ -1,6 +1,7 @@
-# magpie-dpp-mt
+# magpie3-dpp-mt
 
 ## Setup
+
 Set up the project with `npm install`
 
 To run the project locally, run `npm run serve`
@@ -12,6 +13,7 @@ For more information, see our [getting started guide](https://magpie-ea.github.i
 Live version of experiment: <https://magpie-dpp-mt.netlify.app/>.
 
 ### Linting
+
 Before committing changes, it is recommended to run the linter to make sure the changes adhere to the general coding style.
 
 Run the linter using
