@@ -1,36 +1,41 @@
 <template>
   <Experiment title="DPP-MT Online Studie" :wide="true">
-
     <!-- general instructions -->
     <InstructionScreen :title="'Probandeninformation zur Studie “DPP-MT”'">
       <Instructions />
     </InstructionScreen>
 
-
-
-    <Screen key="IDKennung" title="Persönliche Identifikationskennung"
+    <Screen
+      key="IDKennung"
+      title="Persönliche Identifikationskennung"
       :validations="{
-        text: {
+        IDKennung: {
           minLength: $magpie.v.minLength(2)
         }
-      }">
+      }"
+    >
       <Slide>
         <p>
-            Bitte geben Sie hier eine Identifikationskennung an, mit der wir Ihren später
-            VP-Stunden gutschreiben können. Sie können Ihre Matrikelnummer oder Ihren Namen
-            verwenden, aber um die Anonymität Ihrer Daten besser zu sichern, ist eine Kennung,
-            die nicht auf Ihre Person schließen lässt anzuraten.
+          Bitte geben Sie hier eine Identifikationskennung an, mit der wir Ihren
+          später VP-Stunden gutschreiben können. Sie können Ihre Matrikelnummer
+          oder Ihren Namen verwenden, aber um die Anonymität Ihrer Daten besser
+          zu sichern, ist eine Kennung, die nicht auf Ihre Person schließen
+          lässt anzuraten.
         </p>
-        <TextareaInput :response.sync="$magpie.measurements.IDKennung"></TextareaInput>
-        <button @click="$magpie.addExpData({IDKennung_VP: $magpie.measurements.IDKennung}); $magpie.nextScreen();">
-          <!-- FIXME -->
-          <!-- v-if="!$magpie.validateMeasurements.text.$invalid" -->
-            Next
-          </button>
+        <TextareaInput
+          :response.sync="$magpie.measurements.IDKennung"
+        ></TextareaInput>
+        <button
+          v-if="
+            $magpie.measurements.IDKennung &&
+            !$magpie.validateMeasurements.IDKennung.$invalid
+          "
+          @click="$magpie.saveAndNextScreen()"
+        >
+          Next
+        </button>
       </Slide>
     </Screen>
-
-
 
     <!-- info on full-screen and input method -->
     <InstructionScreen :title="'Hinweise zur Durchführung dieses Versuchs'">
@@ -138,7 +143,6 @@
 <script>
 // Load data from csv files as javascript arrays with objects
 import items from '../trials/magpie-mousetrack-DPP-data.csv';
-import trainingItems from '../trials/magpie-mousetrack-DPP-data.csv';
 import _ from 'lodash';
 import TrialScreen from './TrialScreen.vue';
 import Instructions from './InstructionsProlific';
@@ -149,10 +153,16 @@ export default {
   components: { Instructions, TrialScreen, Instructions2 },
   data() {
     const item_set_ID = _.shuffle(_.map(items, 'item_set_ID'))[0];
-    const main_trials = _.filter(items, { 'item_set_ID' : item_set_ID, 'train_or_main' : "main" });
-    const training_trials = _.filter(items, { 'item_set_ID' : item_set_ID, 'train_or_main' : "train" });
+    const main_trials = _.filter(items, {
+      item_set_ID: item_set_ID,
+      train_or_main: 'main'
+    });
+    const training_trials = _.filter(items, {
+      item_set_ID: item_set_ID,
+      train_or_main: 'train'
+    });
     // console.log(training_trials);
-    const group = main_trials[0].group_type == "reliable" ? 0 : 1;
+    const group = main_trials[0].group_type === 'reliable' ? 0 : 1;
 
     return {
       group,
