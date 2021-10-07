@@ -89,9 +89,9 @@
     <!--   </ForcedChoiceMousetrackingScreen> -->
     <!-- </template> -->
 
-    <!-- <InstructionScreen :title="'Instruktionen'"> -->
-    <!--   <Instructions2 /> -->
-    <!-- </InstructionScreen> -->
+    <InstructionScreen :title="'Instruktionen'">
+      <Instructions2 />
+    </InstructionScreen>
 
     <!-- Practice trials -->
     <!-- Here we create screens in a loop for every entry in training -->
