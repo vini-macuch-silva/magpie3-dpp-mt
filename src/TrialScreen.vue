@@ -19,12 +19,10 @@
     </template>
 
     <template #preparation>
-      <button class="prep-start" @click="preparationPlaying = true">
-        Start
-      </button>
+      <button class="prep-start" @click="$refs.audio.play()">Start</button>
       <audio
+        ref="audio"
         :src="'audio/' + item.question_file"
-        :autoplay="preparationPlaying"
         @ended="$magpie.nextSlide()"
       />
     </template>
