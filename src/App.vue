@@ -58,72 +58,72 @@
       </p>
     </InstructionScreen>
 
-    <template v-for="i in 6">
-      <ForcedChoiceMousetrackingScreen
-        :key="'mouse_speed_test-' + i"
-        :select-event="'mouseover'"
-        option1="left"
-        option2="right"
-        qud="Klicken Sie auf 'go' und bewegen Sie den Mauszeiger so schnell wie
-        möglich in einer geraden Linie auf die graue Box.
-        Versuchen Sie die Bewegung auszuführen, ohne die Bewegung durch
-        Abheben der Maus oder des Fingers zu unterbrechen."
-      >
-        <template #option1>
-          <div v-if="i % 2 === 0" class="optionBox left speed-test">X</div>
-        </template>
-        <template #option2>
-          <div v-if="i % 2 === 1" class="optionBox right speed-test">X</div>
-        </template>
-        <template #feedback>
-          <Record
-            :data="{
-              trialType: 'mouse-speed-test',
-              trialNumber: i,
-              ...getScreenDimensions(),
-              position: i % 2 === 0 ? 'left' : 'right'
-            }"
-          />
-          <Wait :time="0" @done="$magpie.saveAndNextScreen()" />
-        </template>
-      </ForcedChoiceMousetrackingScreen>
-    </template>
+    <!-- <template v-for="i in 6"> -->
+    <!--   <ForcedChoiceMousetrackingScreen -->
+    <!--     :key="'mouse_speed_test-' + i" -->
+    <!--     :select-event="'mouseover'" -->
+    <!--     option1="left" -->
+    <!--     option2="right" -->
+    <!--     qud="Klicken Sie auf 'go' und bewegen Sie den Mauszeiger so schnell wie -->
+    <!--     möglich in einer geraden Linie auf die graue Box. -->
+    <!--     Versuchen Sie die Bewegung auszuführen, ohne die Bewegung durch -->
+    <!--     Abheben der Maus oder des Fingers zu unterbrechen." -->
+    <!--   > -->
+    <!--     <template #option1> -->
+    <!--       <div v-if="i % 2 === 0" class="optionBox left speed-test">X</div> -->
+    <!--     </template> -->
+    <!--     <template #option2> -->
+    <!--       <div v-if="i % 2 === 1" class="optionBox right speed-test">X</div> -->
+    <!--     </template> -->
+    <!--     <template #feedback> -->
+    <!--       <Record -->
+    <!--         :data="{ -->
+    <!--           trialType: 'mouse-speed-test', -->
+    <!--           trialNumber: i, -->
+    <!--           ...getScreenDimensions(), -->
+    <!--           position: i % 2 === 0 ? 'left' : 'right' -->
+    <!--         }" -->
+    <!--       /> -->
+    <!--       <Wait :time="0" @done="$magpie.saveAndNextScreen()" /> -->
+    <!--     </template> -->
+    <!--   </ForcedChoiceMousetrackingScreen> -->
+    <!-- </template> -->
 
-    <InstructionScreen :title="'Instruktionen'">
-      <Instructions2 />
-    </InstructionScreen>
+    <!-- <InstructionScreen :title="'Instruktionen'"> -->
+    <!--   <Instructions2 /> -->
+    <!-- </InstructionScreen> -->
 
     <!-- Practice trials -->
     <!-- Here we create screens in a loop for every entry in training -->
-    <template v-for="(trial, i) in training_trials">
-      <TrialScreen
-        :key="'training-' + i"
-        trial-type="training"
-        :trial-number="i"
-        :group="groupName"
-        :item="trial"
-        :progress="i / training_trials.length"
-      />
-    </template>
+    <!-- <template v-for="(trial, i) in training_trials"> -->
+    <!--   <TrialScreen -->
+    <!--     :key="'training-' + i" -->
+    <!--     trial-type="training" -->
+    <!--     :trial-number="i" -->
+    <!--     :group="groupName" -->
+    <!--     :item="trial" -->
+    <!--     :progress="i / training_trials.length" -->
+    <!--   /> -->
+    <!-- </template> -->
 
-    <Screen :title="'Kurze Pause!'">
-      Das Training ist vorbei. Nehmen Sie sich gerne eine kurze Pause, bevor Sie
-      mit dem Hauptteil des Experiments beginnen.
-      <button @click="$magpie.nextScreen()">
-        Zum Hauptteil des Experiments
-      </button>
-    </Screen>
+    <!-- <Screen :title="'Kurze Pause!'"> -->
+    <!--   Das Training ist vorbei. Nehmen Sie sich gerne eine kurze Pause, bevor Sie -->
+    <!--   mit dem Hauptteil des Experiments beginnen. -->
+    <!--   <button @click="$magpie.nextScreen()"> -->
+    <!--     Zum Hauptteil des Experiments -->
+    <!--   </button> -->
+    <!-- </Screen> -->
 
-    <template v-for="(trial, i) in main_trials">
-      <TrialScreen
-        :key="'test-' + i"
-        trial-type="main"
-        :trial-number="i"
-        :group="groupName"
-        :item="trial"
-        :progress="i / main_trials.length"
-      />
-    </template>
+    <!-- <template v-for="(trial, i) in main_trials"> -->
+    <!--   <TrialScreen -->
+    <!--     :key="'test-' + i" -->
+    <!--     trial-type="main" -->
+    <!--     :trial-number="i" -->
+    <!--     :group="groupName" -->
+    <!--     :item="trial" -->
+    <!--     :progress="i / main_trials.length" -->
+    <!--   /> -->
+    <!-- </template> -->
 
     <Screen key="input_method">
       <p>What did you use to complete this task?</p>
