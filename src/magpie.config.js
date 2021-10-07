@@ -1,7 +1,7 @@
 export default {
-  experimentId: '56',
-  serverUrl: 'https://magpie-demo.herokuapp.com',
-  completionUrl: 'https://app.prolific.co/submissions/complete?cc=681A8813',
-  contactEmail: 'michael.franke@uni-osnabrueck.de',
-  mode: 'debug'
+  experimentId: '72',
+  serverUrl: 'https://mcmpact.ikw.uni-osnabrueck.de/magpie/api/submit_experiment',
+  completionUrl: '',
+  contactEmail: 'vini.macuch@gmail.com',
+  mode: 'directLink'
 };
