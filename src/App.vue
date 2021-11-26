@@ -138,7 +138,7 @@
     <Screen v-bind="$attrs" title="Weitere Informationen">
       <Slide>
         <p>
-          Die Beantwortung der folgenden Fragen ist frewillig, aber Ihre
+          Die Beantwortung der folgenden Fragen ist freiwillig, aber Ihre
           Antworten helfen uns, die Ergebnisse besser zu analysieren.
         </p>
         <div style="text-align: left; width: 200px; margin: 0 auto">
@@ -165,14 +165,14 @@
             <label
               >Bildungsgrad
               <DropdownInput
-                :options="['', 'Abitur', 'Bachelor', 'Höherer Abschluss']"
+                :options="['', 'Schulabschluss', 'Bachelor (o.ä.)', 'Höherer Abschluss']"
                 :response.sync="$magpie.measurements.education"
               />
             </label>
           </p>
           <p>
             <label
-              >Muttersprachen
+              >Muttersprache(n)
               <input
                 v-model="$magpie.measurements.languages"
                 type="text"
