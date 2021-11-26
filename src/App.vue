@@ -93,8 +93,7 @@
       <Instructions2 />
     </InstructionScreen>
 
-    Practice trials
-    Here we create screens in a loop for every entry in training
+    Practice trials Here we create screens in a loop for every entry in training
     <template v-for="(trial, i) in training_trials">
       <TrialScreen
         :key="'training-' + i"
