@@ -125,7 +125,9 @@
     </template>
 
     <Screen key="input_method">
-      <p>What did you use to complete this task?</p>
+      <p>
+        Welche Eingabemethode haben Sie benutzt, um die Aufgaben zu erledigen?
+      </p>
       <ForcedChoiceInput
         :response.sync="$magpie.measurements.inputmethod"
         :options="['Mouse', 'Trackpad', 'both', 'neither']"
@@ -133,7 +135,66 @@
       />
     </Screen>
 
-    <PostTestScreen />
+    <Screen v-bind="$attrs" title="Weitere Informationen">
+      <Slide>
+        <p>
+          Die Beantwortung der folgenden Fragen ist frewillig, aber Ihre
+          Antworten helfen uns, die Ergebnisse besser zu analysieren.
+        </p>
+        <div style="text-align: left; width: 200px; margin: 0 auto">
+          <p>
+            <label
+              >Alter
+              <input
+                v-model="$magpie.measurements.age"
+                type="number"
+                max="110"
+                min="18"
+            /></label>
+          </p>
+          <p>
+            <label
+              >Geschlecht
+              <DropdownInput
+                :options="['', 'männlich', 'weiblich', 'divers']"
+                :response.sync="$magpie.measurements.gender"
+              />
+            </label>
+          </p>
+          <p>
+            <label
+              >Bildungsgrad
+              <DropdownInput
+                :options="['', 'Abitur', 'Bachelor', 'Höherer Abschluss']"
+                :response.sync="$magpie.measurements.education"
+              />
+            </label>
+          </p>
+          <p>
+            <label
+              >Muttersprachen
+              <input
+                v-model="$magpie.measurements.languages"
+                type="text"
+                placeholder="Sprache(n), die bei Ihnen als Kind zu Hause gesprochen wurden"
+            /></label>
+          </p>
+          Weitere Kommentare
+          <TextareaInput
+            :response.sync="$magpie.measurements.comments"
+          ></TextareaInput>
+        </div>
+
+        <button
+          @click="
+            $magpie.addExpData($magpie.measurements);
+            $magpie.nextScreen();
+          "
+        >
+          Weiter
+        </button>
+      </Slide>
+    </Screen>
 
     <SubmitResultsScreen />
   </Experiment>
