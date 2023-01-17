@@ -16,15 +16,7 @@
     >
       <Slide>
         <p>
-<<<<<<< HEAD
-          Bitte geben Sie hier eine Identifikationskennung an, mit der wir Ihren
-          später VP-Stunden gutschreiben können. Sie können Ihre Matrikelnummer
-          oder Ihren Namen verwenden, aber um die Anonymität Ihrer Daten besser
-          zu sichern, ist eine Kennung, die nicht auf Ihre Person schließen
-          lässt anzuraten.
-=======
-          Bitte geben Sie hier Ihre Prolific-Identifikationskennung an.
->>>>>>> cdaa0c7 (updated instructions for Prolific run)
+          Bitte geben Sie hier Ihre-Prolific Identifikationskennung an.
         </p>
         <TextareaInput
           :response.sync="$magpie.measurements.IDKennung"
@@ -97,12 +89,7 @@
       <Instructions2 />
     </InstructionScreen>
 
-<<<<<<< HEAD
     Practice trials Here we create screens in a loop for every entry in training
-=======
-    Practice trials
-    Here we create screens in a loop for every entry in training
->>>>>>> cdaa0c7 (updated instructions for Prolific run)
     <template v-for="(trial, i) in training_trials">
       <TrialScreen
         :key="'training-' + i"
@@ -134,13 +121,9 @@
     </template>
 
     <Screen key="input_method">
-<<<<<<< HEAD
       <p>
         Welche Eingabemethode haben Sie benutzt, um die Aufgaben zu erledigen?
       </p>
-=======
-      <p>What did you use to complete this task?</p>
->>>>>>> cdaa0c7 (updated instructions for Prolific run)
       <ForcedChoiceInput
         :response.sync="$magpie.measurements.inputmethod"
         :options="['Mouse', 'Trackpad', 'both', 'neither']"
@@ -148,7 +131,6 @@
       />
     </Screen>
 
-<<<<<<< HEAD
     <Screen v-bind="$attrs" title="Weitere Informationen">
       <Slide>
         <p>
@@ -209,9 +191,6 @@
         </button>
       </Slide>
     </Screen>
-=======
-    <PostTestScreen />
->>>>>>> cdaa0c7 (updated instructions for Prolific run)
 
     <SubmitResultsScreen />
   </Experiment>
