@@ -16,11 +16,7 @@
     >
       <Slide>
         <p>
-          Bitte geben Sie hier eine Identifikationskennung an, mit der wir Ihren
-          später VP-Stunden gutschreiben können. Sie können Ihre Matrikelnummer
-          oder Ihren Namen verwenden, aber um die Anonymität Ihrer Daten besser
-          zu sichern, ist eine Kennung, die nicht auf Ihre Person schließen
-          lässt anzuraten.
+          Bitte geben Sie hier Ihre-Prolific Identifikationskennung an.
         </p>
         <TextareaInput
           :response.sync="$magpie.measurements.IDKennung"
