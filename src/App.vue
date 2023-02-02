@@ -5,33 +5,33 @@
       <Instructions />
     </InstructionScreen>
 
-    <Screen
-      key="IDKennung"
-      title="Persönliche Identifikationskennung"
-      :validations="{
-        IDKennung: {
-          minLength: $magpie.v.minLength(2)
-        }
-      }"
-    >
-      <Slide>
-        <p>
-          Bitte geben Sie hier Ihre-Prolific Identifikationskennung an.
-        </p>
-        <TextareaInput
-          :response.sync="$magpie.measurements.IDKennung"
-        ></TextareaInput>
-        <button
-          v-if="
-            $magpie.measurements.IDKennung &&
-            !$magpie.validateMeasurements.IDKennung.$invalid
-          "
-          @click="$magpie.saveAndNextScreen()"
-        >
-          Next
-        </button>
-      </Slide>
-    </Screen>
+    <!-- <Screen -->
+    <!--   key="IDKennung" -->
+    <!--   title="Persönliche Identifikationskennung" -->
+    <!--   :validations="{ -->
+    <!--     IDKennung: { -->
+    <!--       minLength: $magpie.v.minLength(2) -->
+    <!--     } -->
+    <!--   }" -->
+    <!-- > -->
+    <!--   <Slide> -->
+    <!--     <p> -->
+    <!--       Bitte geben Sie hier Ihre-Prolific Identifikationskennung an. -->
+    <!--     </p> -->
+    <!--     <TextareaInput -->
+    <!--       :response.sync="$magpie.measurements.IDKennung" -->
+    <!--     ></TextareaInput> -->
+    <!--     <button -->
+    <!--       v-if=" -->
+    <!--         $magpie.measurements.IDKennung && -->
+    <!--         !$magpie.validateMeasurements.IDKennung.$invalid -->
+    <!--       " -->
+    <!--       @click="$magpie.saveAndNextScreen()" -->
+    <!--     > -->
+    <!--       Next -->
+    <!--     </button> -->
+    <!--   </Slide> -->
+    <!-- </Screen> -->
 
     <!-- info on full-screen and input method -->
     <InstructionScreen :title="'Hinweise zur Durchführung dieses Versuchs'">
@@ -89,7 +89,7 @@
       <Instructions2 />
     </InstructionScreen>
 
-    Practice trials Here we create screens in a loop for every entry in training
+    <!-- Practice trials Here we create screens in a loop for every entry in training -->
     <template v-for="(trial, i) in training_trials">
       <TrialScreen
         :key="'training-' + i"
