@@ -20,13 +20,15 @@
     "stylelint-config-standard": "^20.0.0"
   },
   "dependencies": {
+    "csv-loader": "^3.0.5",
     "lodash": "^4.17.21",
     "magpie-base": "^3.5.0",
+    "react": "^18.3.1",
     "vue": "^2.6.11"
   },
   "engines": {
-    "node": "16.x",
-    "npm": "8.x"
+    "node": "^16.x",
+    "npm": "^8.x"
   },
   "browserslist": [
     "> 1%",
