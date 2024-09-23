@@ -1,8 +1,7 @@
 <template>
   <div class="instructions">
     <p>
-      Sie beteiligen sich an einer psycholinguistischen Studie des Instituts für
-      Kognitionswissenschaft der Universität Osnabrück.
+      Sie beteiligen sich an einer psycholinguistischen Studie der Universität Tübingen.
     </p>
     <h2>Hintergrund und Ziel der Studie</h2>
     <p>
