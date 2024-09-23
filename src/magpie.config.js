@@ -1,7 +1,7 @@
 export default {
-  experimentId: '75',
-  serverUrl: 'https://mcmpact.ikw.uni-osnabrueck.de/magpie/',
+  experimentId: '3',
+  serverUrl: 'https://magpie-backend-vini.gigalixirapp.com/',
   completionUrl: '',
   contactEmail: 'vini.macuch@gmail.com',
-  mode: 'directLink'
+  mode: 'prolific'
 };
